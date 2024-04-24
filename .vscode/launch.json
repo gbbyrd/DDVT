@@ -1,0 +1,164 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Train Autoencoder",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                // "--base", "configs/autoencoder/custom_vqgan.yaml",
+                "--base", "configs/autoencoder/vqgan_base_rgb_depth.yaml",
+                // "--base", "configs/autoencoder/vqgan_base_depth.yaml",
+                "-t", "--gpus", "0,"
+            ]
+        },
+        {
+            "name": "Train Diffusion Model 3D",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                // "--base", "configs/latent-diffusion/3d_view_translation_config_depth_rgb.yaml",
+                // "--base", "configs/latent-diffusion/3d_view_translation_config_depth.yaml",
+                "--base", "configs/latent-diffusion/3d_view_translation_config_rgb_depth.yaml",
+                "-t", "--gpus", "0,", "--finetune_small_objects"
+            ]
+        },
+        {
+            "name": "Collect Data",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--num_frames", "100",
+                "--dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/semantic_instance_segmentation_testing",
+                "--skip_frames", "5",
+                "--town", "Town05",
+            ]
+        },
+        {
+            "name": "Verify Collected Data",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--verify_dataset",
+                "--dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/semantic_instance_segmentation_testing"
+            ]
+        },
+        {
+            "name": "Clean Collected Data",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--clean_dataset",
+                "--dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/semantic_instance_segmentation_testing"
+            ]
+        },
+        {
+            "name": "Visualize Occlusions Collected Data",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--visualize_occlusions",
+                "--dataset_path", "/home/nianyli/Desktop/code/DiffViewTrans/experiments/v1/dataset_varied_yaw"
+            ]
+        },
+        {
+            "name": "Visualize Collected Data",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--visualize_dataset",
+                "--dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/dataset_full_dof_no_town01_more_towns"
+            ]
+        },
+        {
+            "name": "Run Inference",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--train_dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/varied_yaw_no_town01/dataset_varied_yaw_no_town01",
+                "--trans_label_type", "to",
+                "--vid_duration", "60",
+                "--world", "Town05",
+                "--diff_ckpt", "/home/nianyli/Desktop/code/DDVT/experiments/v1/varied_yaw_no_town01/diff_epoch_150.ckpt",
+                "--diff_config", "/home/nianyli/Desktop/code/DDVT/experiments/v1/varied_yaw_no_town01/3d_view_translation_config_rgb_depth.yaml"
+            ]
+        },
+        {
+            "name": "Autoencoder Inference",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+    
+            ]
+        },
+        {
+            "name": "Get paper visuals",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "scripts",
+            "args": [
+                // "--scenarios", "leaderboard/data/scenarios/no_scenarios.json"  ,
+                // "--routes", "leaderboard/data/training_routes/routes_town01_short.xml" ,
+                // "--repetitions", "1" ,
+                // "--track", "SENSORS" ,
+                // "--checkpoint", "results/sample_result.json" ,
+                // "--agent", "leaderboard/team_code/interfuser_agent.py",
+                // "--agent-config", "leaderboard/team_code/interfuser_config.py" ,
+                // "--debug", "0" ,
+                // "--record", "" ,
+                // "--resume", "True" ,
+                // "--port", "2000" ,
+                // "--trafficManagerPort", "2500",
+                "--train_dataset_path", "/home/nianyli/Desktop/code/DDVT/experiments/v1/experiment_folders/varied_yaw_no_town01",
+                // "--trans_label_type", "to",
+                // "--vid_duration", "60",
+                // "--world", "Town05",
+                // "--enable_DDVT", "True",
+                "--diff_ckpt", "/home/nianyli/Desktop/code/DDVT/experiments/v1/experiment_folders/varied_yaw_no_town01/diff_epoch_150.ckpt",
+                "--diff_config", "/home/nianyli/Desktop/code/DDVT/experiments/v1/experiment_folders/varied_yaw_no_town01/3d_view_translation_config_rgb_depth.yaml",
+                "--img_save_path", "/home/nianyli/Desktop/code/thesis/carla/InterFuser/results/saved_translation_front_only"
+            ]
+        },
+    ]
+}
